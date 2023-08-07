@@ -10,4 +10,9 @@ public class endText : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+    public void endGame()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }

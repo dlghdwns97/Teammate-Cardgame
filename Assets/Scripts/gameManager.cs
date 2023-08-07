@@ -15,6 +15,10 @@ public class gameManager : MonoBehaviour
     public AudioSource audioSource;
     float time = 30.0f;
 
+    public GameObject endCanvas;
+    public Text flipCountText; 
+    private int flipCount = 0;
+
     public static gameManager I;
 
     void Awake()
@@ -54,7 +58,9 @@ public class gameManager : MonoBehaviour
         {
             endText.SetActive(true);
             Time.timeScale = 0.0f;
-        }else if(time <= 10.0f)
+            ShowEndCanvas();
+        }
+        else if(time <= 10.0f)
         {
             ChangeTimerColor();
         }
@@ -78,13 +84,14 @@ public class gameManager : MonoBehaviour
                 endText.SetActive(true);
                 Time.timeScale = 0.0f;
                 Invoke("GameEnd", 1f);
+                ShowEndCanvas();
             }
         }
         else
         {
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
-            ChangeCardColor(firstCard.transform);
+            ChangeCardColor(firstCard.transform); 
             ChangeCardColor(secondCard.transform);
         }
 
@@ -97,16 +104,32 @@ public class gameManager : MonoBehaviour
         GameObject.Find("timeText").GetComponent<Text>().color = Color.red;
     }
 
-    void ChangeCardColor(Transform cardTransform)
+    void ChangeCardColor(Transform cardTransform) //카드 색상 회색으로 변경
     {
         cardTransform.Find("back").GetComponent<SpriteRenderer>().color = Color.gray;
 
         StartCoroutine(ReturnCardColorCoroutine(cardTransform));
     }
 
-    private IEnumerator ReturnCardColorCoroutine(Transform cardTransformRevert)
+    private IEnumerator ReturnCardColorCoroutine(Transform cardTransformRevert) //카드 색상 원상태로 변경
     {
         yield return new WaitForSeconds(1.0f);
         cardTransformRevert.Find("back").GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void FlipCounter() //시도 횟수 카운팅
+    {
+        flipCount++;
+    }
+
+    private void FlipCountText() //flipCount 텍스트로 변환
+    {
+        flipCountText.text = flipCount.ToString() + " 회";
+    }
+
+    private void ShowEndCanvas()
+    {
+        endCanvas.SetActive(true);
+        FlipCountText(); // 종료 시 flipCount 텍스트 업데이트
     }
 }

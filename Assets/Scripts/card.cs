@@ -8,7 +8,6 @@ public class card : MonoBehaviour
     public AudioClip flip;
     public AudioSource audioSource;
 
-
     public void destroyCard()
     {
         Invoke("destroyCardInvoke", 0.5f);
@@ -49,5 +48,7 @@ public class card : MonoBehaviour
             gameManager.I.secondCard = gameObject;
             gameManager.I.isMatched();
         }
+
+        gameManager.I.FlipCounter();
     }
 }
