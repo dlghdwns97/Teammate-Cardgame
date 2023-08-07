@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     public GameObject secondCard;
     public AudioClip match;
     public AudioSource audioSource;
+    public AudioClip incorrect;
     float time = 30.0f;
 
     public static gameManager I;
@@ -82,6 +83,8 @@ public class gameManager : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(incorrect);
+
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
             ChangeCardColor(firstCard.transform);
