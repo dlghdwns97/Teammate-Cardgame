@@ -32,25 +32,6 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        /*
-         * int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
-
-        rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
-
-        for (int i = 0; i < 16; i++)
-        {
-            GameObject newCard = Instantiate(card);
-            newCard.transform.parent = GameObject.Find("Cards").transform;
-
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 3.0f;
-            newCard.transform.position = new Vector3(x, y, 0);
-
-            string rtanName = "rtan" + rtans[i].ToString();
-            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(rtanName);
-        }
-        */
-
         int[] bfour = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
 
         bfour = bfour.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
@@ -120,6 +101,8 @@ public class gameManager : MonoBehaviour
                 Invoke("GameEnd", 1f);
                 ShowEndCanvas();    
             }
+
+            addTime(); //매치 성공 시 시간 추가
         }
         else
         {
@@ -133,7 +116,11 @@ public class gameManager : MonoBehaviour
             successTxt.GetComponent<Text>().text = "실패!";
             successTxt.SetActive(true);
             Invoke("hideSuccessTxt", 1f);
-            //time -= 3f; //매치 실패 시 시간 감소
+
+            if (time >= 10.0f)
+            {
+                ReduceTime(); //매치 실패 시 시간 감소
+            }
         }
 
         firstCard = null;
@@ -143,6 +130,26 @@ public class gameManager : MonoBehaviour
     void ChangeTimerColor()
     {
         GameObject.Find("timeText").GetComponent<Text>().color = Color.red;
+    }
+
+    void ReduceTime() //매칭 실패 시 시간 감소, 타이머 색상 변경
+    {
+        time -= 2f;
+        GameObject.Find("timeText").GetComponent<Text>().color = Color.gray;
+        StartCoroutine("ReturnTimerColorCoroutine");
+    }
+
+    void addTime() //매칭 성공 시 시간 증가, 타이머 색상 변경
+    {
+        time += 2f;
+        GameObject.Find("timeText").GetComponent<Text>().color = Color.yellow;
+        StartCoroutine("ReturnTimerColorCoroutine");
+    }
+
+    private IEnumerator ReturnTimerColorCoroutine()//타이머 색상 원상태로 변경
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameObject.Find("timeText").GetComponent<Text>().color = Color.black;
     }
 
     void ChangeCardColor(Transform cardTransform)//카드 색상 회색으로 변경
