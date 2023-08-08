@@ -15,9 +15,8 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMusicVolume(float volume)
     {
-        
+        audioSource.volume = volume;
     }
 }
