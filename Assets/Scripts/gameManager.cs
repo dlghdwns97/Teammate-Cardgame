@@ -14,6 +14,7 @@ public class gameManager : MonoBehaviour
     public AudioClip match;
     public AudioSource audioSource;
     public AudioClip incorrect;
+    public GameObject successTxt;
     float time = 30.0f;
 
     public static gameManager I;
@@ -27,7 +28,8 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+        /*
+         * int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
 
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
@@ -43,6 +45,24 @@ public class gameManager : MonoBehaviour
             string rtanName = "rtan" + rtans[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(rtanName);
         }
+        */
+
+        int[] bfour = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+
+        bfour = bfour.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+
+        for (int i = 0; i < 16; i++)
+        {
+            GameObject newCard = Instantiate(card);
+            newCard.transform.parent = GameObject.Find("Cards").transform;
+
+            float x = (i / 4) * 1.4f - 2.1f;
+            float y = (i % 4) * 1.4f - 3.0f;
+            newCard.transform.position = new Vector3(x, y, 0);
+
+            string bfourName = "bfour" + bfour[i].ToString();
+            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(bfourName);
+        }
 
     }
 
@@ -55,7 +75,8 @@ public class gameManager : MonoBehaviour
         {
             endText.SetActive(true);
             Time.timeScale = 0.0f;
-        }else if(time <= 10.0f)
+        }
+        else if(time <= 10.0f)
         {
             ChangeTimerColor();
         }
@@ -73,6 +94,19 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
 
+            string[] imageName = new string[] {"이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환" };
+
+            for(int i = 0; i < 8; i++)
+            {
+                if (firstCardImage.Equals("bfour"+i))
+                {
+                    successTxt.GetComponent<Text>().text = "성공! 팀원 " + imageName[i] + "입니다.";
+                }
+            }
+
+            successTxt.SetActive(true);
+            Invoke("hideSuccessTxt", 2f);
+
             int cardsLeft = GameObject.Find("Cards").transform.childCount;
             if (cardsLeft == 2)
             {
@@ -89,6 +123,10 @@ public class gameManager : MonoBehaviour
             secondCard.GetComponent<card>().closeCard();
             ChangeCardColor(firstCard.transform);
             ChangeCardColor(secondCard.transform);
+
+            successTxt.GetComponent<Text>().text = "실패!";
+            successTxt.SetActive(true);
+            Invoke("hideSuccessTxt", 1f);
         }
 
         firstCard = null;
@@ -111,5 +149,10 @@ public class gameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         cardTransformRevert.Find("back").GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void hideSuccessTxt()
+    {
+        successTxt.SetActive(false);
     }
 }
