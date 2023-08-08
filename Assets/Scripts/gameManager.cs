@@ -16,8 +16,10 @@ public class gameManager : MonoBehaviour
     public AudioClip incorrect;
     public GameObject successTxt;
     public GameObject timerTxt;
+    public GameObject scoreTxt;
     float time = 30.0f;
-    float fiveSecond = 5.0f;        // 5초 카운트다운용 시간
+    float fiveSecond = 5.0f;         // 5초 카운트다운용 시간
+    float timeLeft = 0f;             // 점수 계산용 남은 시간
 
     public GameObject endCanvas;
     public Text flipCountText;
@@ -115,6 +117,7 @@ public class gameManager : MonoBehaviour
             if (cardsLeft == 2)
             {
                 endText.SetActive(true);
+                timeLeft = time;                            // 클리어시 남은 시간 저장
                 Time.timeScale = 0.0f;
                 Invoke("GameEnd", 1f);
                 ShowEndCanvas();    
@@ -202,5 +205,12 @@ public class gameManager : MonoBehaviour
     {
         endCanvas.SetActive(true);
         FlipCountText(); // 종료 시 flipCount 텍스트 업데이트
+        makeScore(); // 점수 업데이트
+    }
+
+    public void makeScore()
+    {
+        float score = (timeLeft * 100.0f) - (flipCount * 10.0f);    // 점수 계산 : 남은시간 * 100 - 뒤집은횟수 * 10
+        scoreTxt.GetComponent<Text>().text = "점수 : " + score.ToString("N0");    // 계산한 점수를 소숫점 빼고 표시
     }
 }
