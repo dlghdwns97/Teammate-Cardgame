@@ -91,8 +91,9 @@ public class gameManager : MonoBehaviour
         {
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
-            ChangeCardColor(firstCard.transform); 
+            ChangeCardColor(firstCard.transform);
             ChangeCardColor(secondCard.transform);
+            //time -= 3f; //매치 실패 시 시간 감소
         }
 
         firstCard = null;

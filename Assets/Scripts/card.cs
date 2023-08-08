@@ -30,6 +30,7 @@ public class card : MonoBehaviour
         transform.Find("front").gameObject.SetActive(false);
     }
 
+
     public void OpenCard()
     {
         audioSource.PlayOneShot(flip);
@@ -51,4 +52,5 @@ public class card : MonoBehaviour
 
         gameManager.I.FlipCounter();
     }
+
 }
