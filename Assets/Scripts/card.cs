@@ -52,5 +52,4 @@ public class card : MonoBehaviour
 
         gameManager.I.FlipCounter();
     }
-
 }
