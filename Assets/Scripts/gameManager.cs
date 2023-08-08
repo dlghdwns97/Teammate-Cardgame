@@ -17,6 +17,10 @@ public class gameManager : MonoBehaviour
     public GameObject successTxt;
     float time = 30.0f;
 
+    public GameObject endCanvas;
+    public Text flipCountText;
+    private int flipCount = 0;
+
     public static gameManager I;
 
     void Awake()
@@ -71,12 +75,13 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
 
-        if(time <= 0f)
+        if (time <= 0f)
         {
             endText.SetActive(true);
             Time.timeScale = 0.0f;
+            ShowEndCanvas();
         }
-        else if(time <= 10.0f)
+        else if (time <= 10.0f)
         {
             ChangeTimerColor();
         }
@@ -94,11 +99,11 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
 
-            string[] imageName = new string[] {"이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환" };
+            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환" };
 
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                if (firstCardImage.Equals("bfour"+i))
+                if (firstCardImage.Equals("bfour" + i))
                 {
                     successTxt.GetComponent<Text>().text = "성공! 팀원 " + imageName[i] + "입니다.";
                 }
@@ -113,6 +118,7 @@ public class gameManager : MonoBehaviour
                 endText.SetActive(true);
                 Time.timeScale = 0.0f;
                 Invoke("GameEnd", 1f);
+                ShowEndCanvas();    
             }
         }
         else
@@ -127,6 +133,7 @@ public class gameManager : MonoBehaviour
             successTxt.GetComponent<Text>().text = "실패!";
             successTxt.SetActive(true);
             Invoke("hideSuccessTxt", 1f);
+            //time -= 3f; //매치 실패 시 시간 감소
         }
 
         firstCard = null;
@@ -138,14 +145,14 @@ public class gameManager : MonoBehaviour
         GameObject.Find("timeText").GetComponent<Text>().color = Color.red;
     }
 
-    void ChangeCardColor(Transform cardTransform)
+    void ChangeCardColor(Transform cardTransform)//카드 색상 회색으로 변경
     {
         cardTransform.Find("back").GetComponent<SpriteRenderer>().color = Color.gray;
 
         StartCoroutine(ReturnCardColorCoroutine(cardTransform));
     }
 
-    private IEnumerator ReturnCardColorCoroutine(Transform cardTransformRevert)
+    private IEnumerator ReturnCardColorCoroutine(Transform cardTransformRevert)//카드 색상 원상태로 변경
     {
         yield return new WaitForSeconds(1.0f);
         cardTransformRevert.Find("back").GetComponent<SpriteRenderer>().color = Color.white;
@@ -154,5 +161,21 @@ public class gameManager : MonoBehaviour
     public void hideSuccessTxt()
     {
         successTxt.SetActive(false);
+    }
+
+    public void FlipCounter() //시도 횟수 카운팅
+    {
+        flipCount++;
+    }
+
+    private void FlipCountText() //flipCount 텍스트로 변환
+    {
+        flipCountText.text = flipCount.ToString() + " 회";
+    }
+
+    private void ShowEndCanvas()
+    {
+        endCanvas.SetActive(true);
+        FlipCountText(); // 종료 시 flipCount 텍스트 업데이트
     }
 }
