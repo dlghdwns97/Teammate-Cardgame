@@ -43,8 +43,6 @@ public class card : MonoBehaviour
         if (gameManager.I.firstCard == null)
         {
             gameManager.I.firstCard = gameObject;
-
-            StartCoroutine(AutoCloseCard());
         }
         else
         {
@@ -54,12 +52,4 @@ public class card : MonoBehaviour
 
         gameManager.I.FlipCounter();
     }
-
-    private IEnumerator AutoCloseCard()
-    {
-        yield return new WaitForSeconds(3.0f);
-
-        closeCard();
-    }
-
 }
