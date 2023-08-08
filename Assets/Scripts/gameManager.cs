@@ -162,7 +162,7 @@ public class gameManager : MonoBehaviour
     private IEnumerator ReturnCardColorCoroutine(Transform cardTransformRevert)//카드 색상 원상태로 변경
     {
         yield return new WaitForSeconds(1.0f);
-        cardTransformRevert.Find("back").GetComponent<SpriteRenderer>().color = Color.white;
+        cardTransformRevert.Find("back").GetComponent<SpriteRenderer>().color = Color.black;
     }
 
     public void hideSuccessTxt()
