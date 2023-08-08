@@ -15,7 +15,9 @@ public class gameManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip incorrect;
     public GameObject successTxt;
+    public GameObject timerTxt;
     float time = 30.0f;
+    float fiveSecond = 5.0f;        // 5초 카운트다운용 시간
 
     public GameObject endCanvas;
     public Text flipCountText;
@@ -66,6 +68,22 @@ public class gameManager : MonoBehaviour
         {
             ChangeTimerColor();
         }
+
+        if (timerTxt.activeInHierarchy == true)     // timerTxt SetActive 가 true 일때, 그냥 timerTxt.SetActive(true)를 사용하면 실제론 반환값이 없기 때문에 이렇게 썼습니다. 
+        {
+            fiveSecond -= Time.deltaTime;
+            timerTxt.GetComponent<Text>().text = fiveSecond.ToString("N2");
+            if (fiveSecond < 0f)
+            {
+                timerTxt.SetActive(false);
+                firstCard.GetComponent<card>().closeCard(0f);   // 첫번째 카드 즉시 뒤집음
+                firstCard = null;                               // 안해주면 첫번째 카드 고르고 5초 지난뒤에 똑같은 카드 고르면 카드 사라짐
+            }
+        }
+        else
+        {
+            fiveSecond = 5.0f;                                  // timerTxt 가 사라지면 제한시간 5초로 초기화
+        }
     }
 
     public void isMatched()
@@ -84,14 +102,14 @@ public class gameManager : MonoBehaviour
 
             for (int i = 0; i < 8; i++)
             {
-                if (firstCardImage.Equals("bfour" + i))
+                if (firstCardImage.Equals("bfour" + i))     // firstCardImage 값이 bfour0 ~ bfour7 중 어떤 것인지 확인
                 {
-                    successTxt.GetComponent<Text>().text = "성공! 팀원 " + imageName[i] + "입니다.";
+                    successTxt.GetComponent<Text>().text = "성공! 팀원 " + imageName[i] + "입니다.";       // i값 그대로 위에 배열에서 불러옴
                 }
             }
 
-            successTxt.SetActive(true);
-            Invoke("hideSuccessTxt", 2f);
+            successTxt.SetActive(true);                     // 카드 맞췄을 시 성공 텍스트 등장
+            Invoke("hideSuccessTxt", 2f);                   // 2초 뒤에 숨김
 
             int cardsLeft = GameObject.Find("Cards").transform.childCount;
             if (cardsLeft == 2)
@@ -108,14 +126,14 @@ public class gameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(incorrect);
 
-            firstCard.GetComponent<card>().closeCard();
-            secondCard.GetComponent<card>().closeCard();
+            firstCard.GetComponent<card>().closeCard(0.5f);
+            secondCard.GetComponent<card>().closeCard(0.5f);
             ChangeCardColor(firstCard.transform);
             ChangeCardColor(secondCard.transform);
 
             successTxt.GetComponent<Text>().text = "실패!";
-            successTxt.SetActive(true);
-            Invoke("hideSuccessTxt", 1f);
+            successTxt.SetActive(true);                     // 카드 못맞췄을 시 실패 텍스트 등장
+            Invoke("hideSuccessTxt", 1f);                   // 실패 텍스트는 1초 뒤에 숨김
 
             if (time >= 10.0f)
             {
@@ -165,7 +183,7 @@ public class gameManager : MonoBehaviour
         cardTransformRevert.Find("back").GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public void hideSuccessTxt()
+    public void hideSuccessTxt()    // 성공 텍스트 숨기기용 함수
     {
         successTxt.SetActive(false);
     }
