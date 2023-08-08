@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmusic: {fileID: 8300000, guid: 5685bc4190628cc4b9ce5455ffe6b0fb, type: 3}
   audioSource: {fileID: 1536078171}
+  start: {fileID: 0}
 --- !u!4 &1536078173
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,6 +1348,8 @@ MonoBehaviour:
   secondCard: {fileID: 0}
   match: {fileID: 8300000, guid: fee3d0b556f5cbc4a8aa4e0c4fb03b62, type: 3}
   audioSource: {fileID: 1953539408}
+  incorrect: {fileID: 0}
+  successTxt: {fileID: 0}
   endCanvas: {fileID: 1698578280}
   flipCountText: {fileID: 831304255}
 --- !u!4 &1953539407
