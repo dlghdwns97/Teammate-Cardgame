@@ -125,7 +125,6 @@ public class gameManager : MonoBehaviour
             int cardsLeft = GameObject.Find("Cards").transform.childCount;
             if (cardsLeft == 2)
             {
-                endText.SetActive(true);
                 timeLeft = time;                            // 클리어시 남은 시간 저장
                 Time.timeScale = 0.0f;
                 Invoke("GameEnd", 1f);

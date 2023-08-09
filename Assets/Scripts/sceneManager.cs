@@ -35,12 +35,25 @@ public class sceneManager : MonoBehaviour
         optionMenuCanvas.SetActive(false);
     }
 
-    public void startGame()
+    public void LevelSelect()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LevelSelect");
     }
 
-    public void enterStartMenu()
+    public void Level1()
+    {
+        SceneManager.LoadScene("Level1Scene");
+    }
+    public void Level2()
+    {
+        SceneManager.LoadScene("Level2Scene");
+    }
+    public void Level3()
+    {
+        SceneManager.LoadScene("Level3Scene");
+    }
+
+    public void StartMenu()
     {
         SceneManager.LoadScene("StartScene");
     }
