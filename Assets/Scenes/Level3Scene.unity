@@ -1560,7 +1560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1097801894}
         m_TargetAssemblyTypeName: sceneManager, Assembly-CSharp
-        m_MethodName: enterStartMenu
+        m_MethodName: StartMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2540,7 +2540,7 @@ MonoBehaviour:
   endCanvas: {fileID: 1698578280}
   flipCountText: {fileID: 831304255}
   rows: 4
-  cols: 4
+  cols: 5
 --- !u!4 &1953539407
 Transform:
   m_ObjectHideFlags: 0
