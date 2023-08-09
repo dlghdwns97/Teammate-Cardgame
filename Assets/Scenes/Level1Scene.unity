@@ -2602,6 +2602,7 @@ MonoBehaviour:
   successTxt: {fileID: 653116217}
   timerTxt: {fileID: 1340551195}
   scoreTxt: {fileID: 242802730}
+  back: {fileID: -7426449980752645808, guid: 357b397244299ff4b89d4d1e6f85f1f9, type: 3}
   endCanvas: {fileID: 1698578280}
   flipCountText: {fileID: 831304255}
   rows: 4

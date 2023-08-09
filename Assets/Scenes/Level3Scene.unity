@@ -232,7 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 0}
   optionMenuCanvas: {fileID: 0}
-  levelCanvas: {fileID: 0}
 --- !u!114 &6767488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +383,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 1265508025}
   optionMenuCanvas: {fileID: 0}
-  levelCanvas: {fileID: 0}
 --- !u!114 &225869355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +1027,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 0}
   optionMenuCanvas: {fileID: 0}
-  levelCanvas: {fileID: 0}
 --- !u!114 &768801671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1452,7 +1449,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 1265508025}
   optionMenuCanvas: {fileID: 0}
-  levelCanvas: {fileID: 0}
 --- !u!1 &1017861682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,7 +1661,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 0}
   optionMenuCanvas: {fileID: 0}
-  levelCanvas: {fileID: 0}
 --- !u!114 &1097801895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1938,7 +1933,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 0}
   optionMenuCanvas: {fileID: 0}
-  levelCanvas: {fileID: 0}
 --- !u!1 &1265508025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,11 +2452,11 @@ MonoBehaviour:
   successTxt: {fileID: 653116217}
   timerTxt: {fileID: 1340551195}
   scoreTxt: {fileID: 242802730}
-  back: {fileID: 1953539409}
+  back: {fileID: -7426449980752645808, guid: 357b397244299ff4b89d4d1e6f85f1f9, type: 3}
   endCanvas: {fileID: 1698578280}
   flipCountText: {fileID: 831304255}
   rows: 4
-  cols: 4
+  cols: 5
 --- !u!4 &1953539407
 Transform:
   m_ObjectHideFlags: 0
