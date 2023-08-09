@@ -38,6 +38,13 @@ public class sceneManager : MonoBehaviour
     public void startGame()
     {
         SceneManager.LoadScene("MainScene");
+
+    }
+
+    public void startGameLevel2()
+    {
+        SceneManager.LoadScene("MainScene2");
+
     }
 
     public void enterStartMenu()

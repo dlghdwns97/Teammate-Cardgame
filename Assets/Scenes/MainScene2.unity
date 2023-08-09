@@ -715,7 +715,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.3529412, g: 0.3529412, b: 0.88235295, a: 0}
+  m_BackGroundColor: {r: 0.06578852, g: 0.06578852, b: 0.4528302, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2437,12 +2437,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1953539405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5973faf4739b1ff4b9f42734e953a480, type: 3}
+  m_Script: {fileID: 11500000, guid: f09f3e89b9096f244b6ed3f7187f45c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 371117439}
   endText: {fileID: 1229509513}
-  card: {fileID: 2568471320177452792, guid: 357b397244299ff4b89d4d1e6f85f1f9, type: 3}
+  card: {fileID: 2568471320177452792, guid: 06df942830e412247800c2a7e4bbc76d, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   match: {fileID: 8300000, guid: fee3d0b556f5cbc4a8aa4e0c4fb03b62, type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class gameManager : MonoBehaviour
+public class lv2GameManager : MonoBehaviour
 {
     public Text timeText;
     public GameObject endText;
@@ -25,9 +25,9 @@ public class gameManager : MonoBehaviour
     public Text flipCountText;
     private int flipCount = 0;
 
-    public int currentLevel = 1;
+    public int currentLevel = 2;
 
-    public static gameManager I;
+    public static lv2GameManager I;
 
     void Awake()
     {
@@ -38,17 +38,17 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        int[] bfour = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+        int[] bfour = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8 ,8 ,9 ,9 };
 
         bfour = bfour.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 20; i++)
         {
             GameObject newCard = Instantiate(card);
             newCard.transform.parent = GameObject.Find("Cards").transform;
 
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 3.0f;
+            float x = (i / 5) * 1.4f - 2.1f;
+            float y = (i % 5) * 1.4f - 4.2f;
             newCard.transform.position = new Vector3(x, y, 0);
 
             string bfourName = "bfour" + bfour[i].ToString();
@@ -79,7 +79,7 @@ public class gameManager : MonoBehaviour
             if (fiveSecond < 0f)
             {
                 timerTxt.SetActive(false);
-                firstCard.GetComponent<card>().closeCard(0f);   // 첫번째 카드 즉시 뒤집음
+                firstCard.GetComponent<card2>().closeCard(0f);   // 첫번째 카드 즉시 뒤집음
                 firstCard = null;                               // 안해주면 첫번째 카드 고르고 5초 지난뒤에 똑같은 카드 고르면 카드 사라짐
             }
         }
@@ -98,12 +98,12 @@ public class gameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(match);
 
-            firstCard.GetComponent<card>().destroyCard();
-            secondCard.GetComponent<card>().destroyCard();
+            firstCard.GetComponent<card2>().destroyCard();
+            secondCard.GetComponent<card2>().destroyCard();
 
-            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환" };
+            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "김나운", "진재환", "진재환" };
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
                 if (firstCardImage.Equals("bfour" + i))     // firstCardImage 값이 bfour0 ~ bfour7 중 어떤 것인지 확인
                 {
@@ -121,7 +121,7 @@ public class gameManager : MonoBehaviour
                 timeLeft = time;                            // 클리어시 남은 시간 저장
                 Time.timeScale = 0.0f;
                 Invoke("GameEnd", 1f);
-                ShowEndCanvas();
+                ShowEndCanvas();    
             }
 
             addTime(); //매치 성공 시 시간 추가
@@ -130,8 +130,8 @@ public class gameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(incorrect);
 
-            firstCard.GetComponent<card>().closeCard(0.5f);
-            secondCard.GetComponent<card>().closeCard(0.5f);
+            firstCard.GetComponent<card2>().closeCard(0.5f);
+            secondCard.GetComponent<card2>().closeCard(0.5f);
             ChangeCardColor(firstCard.transform);
             ChangeCardColor(secondCard.transform);
 
