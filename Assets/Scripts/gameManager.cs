@@ -18,6 +18,8 @@ public class gameManager : MonoBehaviour
     public GameObject timerTxt;
     public GameObject scoreTxt;
     public Animator back;
+    public Text bestscore;
+    public Text endbestscoreTxt;
     float time = 30.0f;
     float fiveSecond = 5.0f;         // 5초 카운트다운용 시간
     float timeLeft = 0f;             // 점수 계산용 남은 시간
@@ -65,6 +67,8 @@ public class gameManager : MonoBehaviour
         }
 
         back.Play("card_back_fade");
+
+        bestscore.text = PlayerPrefs.GetFloat("bestScore").ToString("N0");
     }
 
     void Update()
@@ -223,5 +227,19 @@ public class gameManager : MonoBehaviour
     {
         float score = (timeLeft * 100.0f) - (flipCount * 10.0f);    // 점수 계산 : 남은시간 * 100 - 뒤집은횟수 * 10
         scoreTxt.GetComponent<Text>().text = "점수 : " + score.ToString("N0");    // 계산한 점수를 소숫점 빼고 표시
+
+        if (PlayerPrefs.HasKey("bestScore") == false)
+        {
+            PlayerPrefs.SetFloat("bestScore", score);
+        }
+        else
+        {
+            if (PlayerPrefs.GetFloat("bestScore") < score)
+            {
+                PlayerPrefs.SetFloat("bestScore", score);
+            }
+        }
+
+        endbestscoreTxt.text = "최고점수 : " + PlayerPrefs.GetFloat("bestScore").ToString("N0");
     }
 }
