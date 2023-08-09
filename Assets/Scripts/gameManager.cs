@@ -17,6 +17,7 @@ public class gameManager : MonoBehaviour
     public GameObject successTxt;
     public GameObject timerTxt;
     public GameObject scoreTxt;
+    public Animator back;
     float time = 30.0f;
     float fiveSecond = 5.0f;         // 5초 카운트다운용 시간
     float timeLeft = 0f;             // 점수 계산용 남은 시간
@@ -56,12 +57,14 @@ public class gameManager : MonoBehaviour
             newCard.transform.parent = GameObject.Find("Cards").transform;
 
             float x = (i / cols) * 1.4f - 2.1f;
-            float y = (i % cols) * 1.4f - (cols-1.0f);
+            float y = (i % cols) * 1.4f - (cols - 1.0f);
             newCard.transform.position = new Vector3(x, y, 0);
 
             string bfourName = "bfour" + bfour[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(bfourName);
         }
+
+        back.Play("card_back_fade");
     }
 
     void Update()
