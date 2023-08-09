@@ -25,6 +25,10 @@ public class gameManager : MonoBehaviour
     public Text flipCountText;
     private int flipCount = 0;
 
+    public int rows = 4; // 행
+    public int cols = 4; // 열
+
+
     public static gameManager I;
 
     void Awake()
@@ -36,23 +40,28 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        int[] bfour = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+        int cardCount = rows * cols; // 카드 총 개수
+        int[] bfour = new int[cardCount]; 
+
+        for (int i = 0; i < cardCount; i++)
+        {
+            bfour[i] = i / 2; // 0부터 (cardCount / 2 - 1)까지 반복되는 값 할당, 4x4일 때 {0,0,1,1 ... 7,7}
+        }
 
         bfour = bfour.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < cardCount; i++)
         {
             GameObject newCard = Instantiate(card);
             newCard.transform.parent = GameObject.Find("Cards").transform;
 
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 3.0f;
+            float x = (i / cols) * 1.4f - 2.1f;
+            float y = (i % cols) * 1.4f - (cols-1.0f);
             newCard.transform.position = new Vector3(x, y, 0);
 
             string bfourName = "bfour" + bfour[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(bfourName);
         }
-
     }
 
     void Update()
@@ -100,11 +109,11 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
 
-            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환" };
+            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환", "르탄이", "르탄이" };
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
-                if (firstCardImage.Equals("bfour" + i))     // firstCardImage 값이 bfour0 ~ bfour7 중 어떤 것인지 확인
+                if (firstCardImage.Equals("bfour" + i))     // firstCardImage 값이 bfour0 ~ bfour9 중 어떤 것인지 확인
                 {
                     successTxt.GetComponent<Text>().text = "성공! 팀원 " + imageName[i] + "입니다.";       // i값 그대로 위에 배열에서 불러옴
                 }
