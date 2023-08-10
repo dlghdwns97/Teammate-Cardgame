@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 225869354}
   - component: {fileID: 225869353}
   m_Layer: 5
-  m_Name: retry
+  m_Name: resume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,7 +924,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 768801670}
         m_TargetAssemblyTypeName: sceneManager, Assembly-CSharp
-        m_MethodName: enterStartMenu
+        m_MethodName: StartMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
