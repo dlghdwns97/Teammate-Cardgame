@@ -1,1 +1,2 @@
-*.html linguist-detectable=false
+ProjectSettings/** linguist-documentation=false
+ProjectSettings/** linguist-vendored=false
