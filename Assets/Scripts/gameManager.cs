@@ -68,7 +68,8 @@ public class gameManager : MonoBehaviour
 
         back.Play("card_back_fade");
 
-        bestscore.text = PlayerPrefs.GetFloat("bestScore").ToString("N0");
+        int level = cols - 2;
+        bestscore.text = PlayerPrefs.GetFloat("bestScore" + level).ToString("N0");
     }
 
     void Update()
@@ -135,6 +136,8 @@ public class gameManager : MonoBehaviour
                 timeLeft = time;                            // 클리어시 남은 시간 저장
                 Time.timeScale = 0.0f;
                 Invoke("GameEnd", 1f);
+                int level = cols - 2;
+                PlayerPrefs.SetInt("levelAt", level + 2);
                 ShowEndCanvas();    
             }
 
@@ -213,7 +216,8 @@ public class gameManager : MonoBehaviour
 
     private void FlipCountText() //flipCount 텍스트로 변환
     {
-        flipCountText.text = flipCount.ToString() + " 회";
+        int matchCount = flipCount / 2 + 1;
+        flipCountText.text = matchCount.ToString() + " 회";
     }
 
     private void ShowEndCanvas()
@@ -225,21 +229,28 @@ public class gameManager : MonoBehaviour
 
     public void makeScore()
     {
-        float score = (timeLeft * 100.0f) - (flipCount * 10.0f);    // 점수 계산 : 남은시간 * 100 - 뒤집은횟수 * 10
+        float score = (timeLeft * 100.0f) - (flipCount * 10.0f); // 점수 계산 : 남은시간 * 100 - 뒤집은횟수 * 10
+        if (score < 0.0f)
+        {
+            score = 0.0f;
+        }
+
         scoreTxt.GetComponent<Text>().text = "점수 : " + score.ToString("N0");    // 계산한 점수를 소숫점 빼고 표시
 
-        if (PlayerPrefs.HasKey("bestScore") == false)
+        int level = cols - 2;
+
+        if (PlayerPrefs.HasKey("bestScore" + level) == false)
         {
-            PlayerPrefs.SetFloat("bestScore", score);
+            PlayerPrefs.SetFloat("bestScore" + level, score);
         }
         else
         {
-            if (PlayerPrefs.GetFloat("bestScore") < score)
+            if (PlayerPrefs.GetFloat("bestScore" + level) < score)
             {
-                PlayerPrefs.SetFloat("bestScore", score);
+                PlayerPrefs.SetFloat("bestScore" + level, score);
             }
         }
 
-        endbestscoreTxt.text = "최고점수 : " + PlayerPrefs.GetFloat("bestScore").ToString("N0");
+        endbestscoreTxt.text = "최고점수 : " + PlayerPrefs.GetFloat("bestScore" + level).ToString("N0");
     }
 }
