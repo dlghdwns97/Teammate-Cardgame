@@ -1,2 +1,2 @@
-ProjectSettings/** linguist-documentation=false
-ProjectSettings/** linguist-vendored=false
+jest.config.htm linguist-vendored
+yarn-*.htm linguist-vendored
