@@ -116,7 +116,7 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
 
-            string[] imageName = new string[] { "ÀÌÈ«ÁØ", "ÀÌÈ«ÁØ", "ÀÌÈ«ÁØ", "±è³ª¿î", "±è³ª¿î", "±è³ª¿î", "ÁøÀçÈ¯", "ÁøÀçÈ¯", "¸£ÅºÀÌ", "¸£ÅºÀÌ" };
+            string[] imageName = new string[] { "ÀÌÈ«ÁØ", "ÀÌÈ«ÁØ", "ÀÌÈ«ÁØ", "±è³ª¿î", "±è³ª¿î", "±è³ª¿î", "¸£ÅºÀÌ", "¸£ÅºÀÌ", "¸£ÅºÀÌ", "¸£ÅºÀÌ" };
 
             for (int i = 0; i < 10; i++)
             {
