@@ -21,7 +21,7 @@ public class gameManager : MonoBehaviour
     public Text bestscore;
     public Text endbestscoreTxt;
     float time = 30.0f;
-    float fiveSecond = 5.0f;         // 5초 카운트다운용 시간
+    float fiveSecond = 3.0f;         // 5초 카운트다운용 시간
     float timeLeft = 0f;             // 점수 계산용 남은 시간
 
     public GameObject endCanvas;
@@ -101,7 +101,7 @@ public class gameManager : MonoBehaviour
         }
         else
         {
-            fiveSecond = 5.0f;                                  // timerTxt 가 사라지면 제한시간 5초로 초기화
+            fiveSecond = 3.0f;                                  // timerTxt 가 사라지면 제한시간 5초로 초기화
         }
     }
 
@@ -117,7 +117,7 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
 
-            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "진재환", "진재환", "르탄이", "르탄이" };
+            string[] imageName = new string[] { "이홍준", "이홍준", "이홍준", "김나운", "김나운", "김나운", "르탄이", "르탄이", "르탄이", "르탄이" };
 
             for (int i = 0; i < 10; i++)
             {
@@ -174,14 +174,14 @@ public class gameManager : MonoBehaviour
     void ReduceTime() //매칭 실패 시 시간 감소, 타이머 색상 변경
     {
         time -= 2f;
-        GameObject.Find("timeText").GetComponent<Text>().color = Color.gray;
+        GameObject.Find("timeText").GetComponent<Text>().color = Color.red;
         StartCoroutine("ReturnTimerColorCoroutine");
     }
 
     void addTime() //매칭 성공 시 시간 증가, 타이머 색상 변경
     {
         time += 2f;
-        GameObject.Find("timeText").GetComponent<Text>().color = Color.yellow;
+        GameObject.Find("timeText").GetComponent<Text>().color = Color.green;
         StartCoroutine("ReturnTimerColorCoroutine");
     }
 
@@ -235,7 +235,7 @@ public class gameManager : MonoBehaviour
             score = 0.0f;
         }
 
-        scoreTxt.GetComponent<Text>().text = "점수 : " + score.ToString("N0");    // 계산한 점수를 소숫점 빼고 표시
+        scoreTxt.GetComponent<Text>().text = "현재 점수 : " + score.ToString("N0");    // 계산한 점수를 소숫점 빼고 표시
 
         int level = cols - 2;
 
@@ -251,6 +251,6 @@ public class gameManager : MonoBehaviour
             }
         }
 
-        endbestscoreTxt.text = "최고점수 : " + PlayerPrefs.GetFloat("bestScore" + level).ToString("N0");
+        endbestscoreTxt.text = "최고 점수 : " + PlayerPrefs.GetFloat("bestScore" + level).ToString("N0");
     }
 }

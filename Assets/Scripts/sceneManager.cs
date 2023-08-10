@@ -11,6 +11,8 @@ public class sceneManager : MonoBehaviour
     public GameObject pauseMenuCanvas;
     public GameObject optionMenuCanvas;
 
+    public AudioManager audioManager;
+
     public void Resume()
     {
         pauseMenuCanvas.SetActive(false);
@@ -37,6 +39,13 @@ public class sceneManager : MonoBehaviour
 
     public void LevelSelect()
     {
+        audioManager.PlaySFX();
+        StartCoroutine("LoadSceneWithDelay"); // 버튼 사운드 재생 후 씬 로드
+    }
+
+    private IEnumerator LoadSceneWithDelay()
+    {
+        yield return new WaitForSecondsRealtime(0.4f);
         SceneManager.LoadScene("LevelSelect");
     }
 

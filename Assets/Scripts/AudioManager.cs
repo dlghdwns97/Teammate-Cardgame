@@ -5,18 +5,32 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip bgmusic;
-    public AudioSource audioSource;
+    public AudioSource bgmAudioSource;
     public AudioClip start;
-    // Start is called before the first frame update
+
+    public AudioClip sfx;
+    public AudioSource sfxAudioSource;
+
     void Start()
     {
-        audioSource.PlayOneShot(start);
-        audioSource.clip = bgmusic;
-        audioSource.Play();
+        bgmAudioSource.PlayOneShot(start);
+        bgmAudioSource.clip = bgmusic;
+        bgmAudioSource.Play();
+    }
+
+    public void PlaySFX()
+    {
+        sfxAudioSource.clip = sfx;
+        sfxAudioSource.PlayOneShot(sfx);
     }
 
     public void SetMusicVolume(float volume)
     {
-        audioSource.volume = volume;
+        bgmAudioSource.volume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        sfxAudioSource.volume = volume;
     }
 }
