@@ -22,7 +22,8 @@
 ### 게임 화면
 ![image](https://github.com/dlghdwns97/Teammate-Cardgame/assets/111439484/7d8b257b-d394-4be1-bef0-1884f8596388)
 
-
+### 게임 플로우 차트
+![Untitled Diagram](https://github.com/dlghdwns97/Teammate-Cardgame/assets/111439484/03a19f1c-d7d4-41d5-8ab7-971e78cfdce9)
 
 
 
